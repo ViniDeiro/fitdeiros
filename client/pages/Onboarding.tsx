@@ -5,9 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, ArrowRight, User, Target, DollarSign, Activity } from "lucide-react";
+import { ArrowLeft, ArrowRight, User, Activity, Target, DollarSign } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 interface UserProfile {
@@ -17,12 +16,8 @@ interface UserProfile {
   bodyType: string;
   currentWeight: string;
   targetWeight: string;
-  height: string;
-  activityLevel: string;
   goal: string;
   budget: string;
-  timeframe: string;
-  restrictions: string;
 }
 
 export default function Onboarding() {
@@ -35,12 +30,8 @@ export default function Onboarding() {
     bodyType: "",
     currentWeight: "",
     targetWeight: "",
-    height: "",
-    activityLevel: "",
     goal: "",
-    budget: "",
-    timeframe: "",
-    restrictions: ""
+    budget: ""
   });
 
   const totalSteps = 4;
@@ -54,7 +45,6 @@ export default function Onboarding() {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Save profile and navigate to dashboard
       localStorage.setItem('userProfile', JSON.stringify(profile));
       navigate('/dashboard');
     }
@@ -69,11 +59,11 @@ export default function Onboarding() {
   const isStepValid = () => {
     switch (currentStep) {
       case 1:
-        return profile.name && profile.age && profile.gender && profile.height;
+        return profile.name && profile.age && profile.gender;
       case 2:
-        return profile.bodyType && profile.currentWeight && profile.targetWeight && profile.activityLevel;
+        return profile.bodyType && profile.currentWeight && profile.targetWeight;
       case 3:
-        return profile.goal && profile.timeframe;
+        return profile.goal;
       case 4:
         return profile.budget;
       default:
@@ -85,110 +75,98 @@ export default function Onboarding() {
     switch (currentStep) {
       case 1:
         return (
-          <Card className="w-full max-w-2xl">
-            <CardHeader className="text-center">
-              <User className="h-12 w-12 text-primary mx-auto mb-4" />
-              <CardTitle className="text-2xl">Vamos te conhecer melhor</CardTitle>
-              <CardDescription>
-                Primeiro, conte-nos algumas informações básicas sobre você
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
+          <div className="w-full max-w-md mx-auto">
+            <div className="text-center mb-8">
+              <User className="h-16 w-16 text-primary mx-auto mb-4" />
+              <h2 className="text-2xl font-bold mb-2">Vamos começar!</h2>
+              <p className="text-muted-foreground">
+                Conte-nos um pouco sobre você
+              </p>
+            </div>
+
+            <div className="space-y-6">
               <div className="space-y-2">
-                <Label htmlFor="name">Nome completo</Label>
+                <Label htmlFor="name">Como você se chama?</Label>
                 <Input
                   id="name"
                   placeholder="Seu nome"
                   value={profile.name}
                   onChange={(e) => updateProfile('name', e.target.value)}
+                  className="text-center"
                 />
               </div>
               
-              <div className="grid grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <Label htmlFor="age">Idade</Label>
-                  <Input
-                    id="age"
-                    type="number"
-                    placeholder="25"
-                    value={profile.age}
-                    onChange={(e) => updateProfile('age', e.target.value)}
-                  />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="height">Altura (cm)</Label>
-                  <Input
-                    id="height"
-                    type="number"
-                    placeholder="175"
-                    value={profile.height}
-                    onChange={(e) => updateProfile('height', e.target.value)}
-                  />
-                </div>
+              <div className="space-y-2">
+                <Label htmlFor="age">Qual sua idade?</Label>
+                <Input
+                  id="age"
+                  type="number"
+                  placeholder="25"
+                  value={profile.age}
+                  onChange={(e) => updateProfile('age', e.target.value)}
+                  className="text-center"
+                />
               </div>
 
-              <div className="space-y-3">
+              <div className="space-y-4">
                 <Label>Gênero</Label>
                 <RadioGroup
                   value={profile.gender}
                   onValueChange={(value) => updateProfile('gender', value)}
+                  className="grid grid-cols-2 gap-4"
                 >
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="masculino" id="masculino" />
-                    <Label htmlFor="masculino">Masculino</Label>
+                    <Label htmlFor="masculino" className="cursor-pointer font-medium">Masculino</Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-2 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="feminino" id="feminino" />
-                    <Label htmlFor="feminino">Feminino</Label>
+                    <Label htmlFor="feminino" className="cursor-pointer font-medium">Feminino</Label>
                   </div>
                 </RadioGroup>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         );
 
       case 2:
         return (
-          <Card className="w-full max-w-2xl">
-            <CardHeader className="text-center">
-              <Activity className="h-12 w-12 text-primary mx-auto mb-4" />
-              <CardTitle className="text-2xl">Seu perfil físico</CardTitle>
-              <CardDescription>
-                Essas informações nos ajudam a criar o plano perfeito para você
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-3">
+          <div className="w-full max-w-md mx-auto">
+            <div className="text-center mb-8">
+              <Activity className="h-16 w-16 text-primary mx-auto mb-4" />
+              <h2 className="text-2xl font-bold mb-2">Seu biotipo</h2>
+              <p className="text-muted-foreground">
+                Isso nos ajuda a personalizar seu plano
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <div className="space-y-4">
                 <Label>Qual é o seu biotipo?</Label>
                 <RadioGroup
                   value={profile.bodyType}
                   onValueChange={(value) => updateProfile('bodyType', value)}
+                  className="space-y-3"
                 >
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="ectomorfo" id="ectomorfo" />
-                    <Label htmlFor="ectomorfo" className="cursor-pointer">
-                      <div>
-                        <div className="font-medium">Ectomorfo</div>
-                        <div className="text-sm text-muted-foreground">Magro, dificuldade para ganhar peso</div>
-                      </div>
+                    <Label htmlFor="ectomorfo" className="cursor-pointer flex-1">
+                      <div className="font-medium">Ectomorfo</div>
+                      <div className="text-sm text-muted-foreground">Magro, dificuldade para ganhar peso</div>
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="mesomorfo" id="mesomorfo" />
-                    <Label htmlFor="mesomorfo" className="cursor-pointer">
-                      <div>
-                        <div className="font-medium">Mesomorfo</div>
-                        <div className="text-sm text-muted-foreground">Atlético, ganha e perde peso facilmente</div>
-                      </div>
+                    <Label htmlFor="mesomorfo" className="cursor-pointer flex-1">
+                      <div className="font-medium">Mesomorfo</div>
+                      <div className="text-sm text-muted-foreground">Atlético, músculos definidos</div>
                     </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="endomorfo" id="endomorfo" />
-                    <Label htmlFor="endomorfo" className="cursor-pointer">
-                      <div>
-                        <div className="font-medium">Endomorfo</div>
-                        <div className="text-sm text-muted-foreground">Tendência a acumular gordura, metabolismo lento</div>
-                      </div>
+                    <Label htmlFor="endomorfo" className="cursor-pointer flex-1">
+                      <div className="font-medium">Endomorfo</div>
+                      <div className="text-sm text-muted-foreground">Facilidade para ganhar peso</div>
                     </Label>
                   </div>
                 </RadioGroup>
@@ -203,6 +181,7 @@ export default function Onboarding() {
                     placeholder="70"
                     value={profile.currentWeight}
                     onChange={(e) => updateProfile('currentWeight', e.target.value)}
+                    className="text-center"
                   />
                 </div>
                 <div className="space-y-2">
@@ -213,144 +192,122 @@ export default function Onboarding() {
                     placeholder="75"
                     value={profile.targetWeight}
                     onChange={(e) => updateProfile('targetWeight', e.target.value)}
+                    className="text-center"
                   />
                 </div>
               </div>
-
-              <div className="space-y-2">
-                <Label>Nível de atividade física atual</Label>
-                <Select value={profile.activityLevel} onValueChange={(value) => updateProfile('activityLevel', value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecione seu nível" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="sedentario">Sedentário (pouco ou nenhum exercício)</SelectItem>
-                    <SelectItem value="leve">Leve (1-3 dias por semana)</SelectItem>
-                    <SelectItem value="moderado">Moderado (3-5 dias por semana)</SelectItem>
-                    <SelectItem value="intenso">Intenso (6-7 dias por semana)</SelectItem>
-                    <SelectItem value="muito-intenso">Muito intenso (2x por dia)</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         );
 
       case 3:
         return (
-          <Card className="w-full max-w-2xl">
-            <CardHeader className="text-center">
-              <Target className="h-12 w-12 text-primary mx-auto mb-4" />
-              <CardTitle className="text-2xl">Seus objetivos</CardTitle>
-              <CardDescription>
-                Defina claramente o que você quer alcançar
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-3">
-                <Label>Qual é o seu objetivo principal?</Label>
+          <div className="w-full max-w-md mx-auto">
+            <div className="text-center mb-8">
+              <Target className="h-16 w-16 text-primary mx-auto mb-4" />
+              <h2 className="text-2xl font-bold mb-2">Seu objetivo</h2>
+              <p className="text-muted-foreground">
+                O que você quer alcançar?
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <div className="space-y-4">
                 <RadioGroup
                   value={profile.goal}
                   onValueChange={(value) => updateProfile('goal', value)}
+                  className="space-y-3"
                 >
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="ganhar-peso" id="ganhar-peso" />
-                    <Label htmlFor="ganhar-peso">Ganhar peso (massa muscular)</Label>
+                    <Label htmlFor="ganhar-peso" className="cursor-pointer flex-1">
+                      <div className="font-medium">💪 Ganhar peso</div>
+                      <div className="text-sm text-muted-foreground">Aumentar massa muscular</div>
+                    </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="perder-peso" id="perder-peso" />
-                    <Label htmlFor="perder-peso">Perder peso (queimar gordura)</Label>
+                    <Label htmlFor="perder-peso" className="cursor-pointer flex-1">
+                      <div className="font-medium">🔥 Perder peso</div>
+                      <div className="text-sm text-muted-foreground">Queimar gordura</div>
+                    </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="tonificar" id="tonificar" />
-                    <Label htmlFor="tonificar">Tonificar/Definir músculos</Label>
+                    <Label htmlFor="tonificar" className="cursor-pointer flex-1">
+                      <div className="font-medium">✨ Tonificar</div>
+                      <div className="text-sm text-muted-foreground">Definir músculos</div>
+                    </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="manutencao" id="manutencao" />
-                    <Label htmlFor="manutencao">Manter peso atual</Label>
+                    <Label htmlFor="manutencao" className="cursor-pointer flex-1">
+                      <div className="font-medium">⚖️ Manter peso</div>
+                      <div className="text-sm text-muted-foreground">Peso atual está bom</div>
+                    </Label>
                   </div>
                 </RadioGroup>
               </div>
-
-              <div className="space-y-2">
-                <Label>Em quanto tempo quer alcançar o resultado?</Label>
-                <Select value={profile.timeframe} onValueChange={(value) => updateProfile('timeframe', value)}>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Selecione o prazo" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="3-meses">3 meses</SelectItem>
-                    <SelectItem value="6-meses">6 meses</SelectItem>
-                    <SelectItem value="1-ano">1 ano</SelectItem>
-                    <SelectItem value="2-anos">2 anos ou mais</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
-
-              <div className="space-y-2">
-                <Label htmlFor="restrictions">Restrições alimentares ou problemas de saúde</Label>
-                <Textarea
-                  id="restrictions"
-                  placeholder="Ex: intolerância à lactose, vegetariano, diabetes, etc. (opcional)"
-                  value={profile.restrictions}
-                  onChange={(e) => updateProfile('restrictions', e.target.value)}
-                />
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         );
 
       case 4:
         return (
-          <Card className="w-full max-w-2xl">
-            <CardHeader className="text-center">
-              <DollarSign className="h-12 w-12 text-primary mx-auto mb-4" />
-              <CardTitle className="text-2xl">Orçamento para alimentação</CardTitle>
-              <CardDescription>
-                Vamos criar um plano que caiba no seu bolso
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-6">
-              <div className="space-y-3">
-                <Label>Quanto você pode gastar mensalmente com alimentação e suplementos?</Label>
+          <div className="w-full max-w-md mx-auto">
+            <div className="text-center mb-8">
+              <DollarSign className="h-16 w-16 text-primary mx-auto mb-4" />
+              <h2 className="text-2xl font-bold mb-2">Orçamento mensal</h2>
+              <p className="text-muted-foreground">
+                Para alimentação e suplementos
+              </p>
+            </div>
+
+            <div className="space-y-6">
+              <div className="space-y-4">
                 <RadioGroup
                   value={profile.budget}
                   onValueChange={(value) => updateProfile('budget', value)}
+                  className="space-y-3"
                 >
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="200" id="budget-200" />
-                    <Label htmlFor="budget-200">Até R$ 200</Label>
+                    <Label htmlFor="budget-200" className="cursor-pointer flex-1">
+                      <div className="font-medium">Até R$ 200</div>
+                      <div className="text-sm text-muted-foreground">Básico essencial</div>
+                    </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="300" id="budget-300" />
-                    <Label htmlFor="budget-300">R$ 200 - R$ 300</Label>
+                    <Label htmlFor="budget-300" className="cursor-pointer flex-1">
+                      <div className="font-medium">R$ 200 - R$ 300</div>
+                      <div className="text-sm text-muted-foreground">Boa variedade</div>
+                    </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="500" id="budget-500" />
-                    <Label htmlFor="budget-500">R$ 300 - R$ 500</Label>
+                    <Label htmlFor="budget-500" className="cursor-pointer flex-1">
+                      <div className="font-medium">R$ 300 - R$ 500</div>
+                      <div className="text-sm text-muted-foreground">Mais opções</div>
+                    </Label>
                   </div>
-                  <div className="flex items-center space-x-2">
+                  <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="800" id="budget-800" />
-                    <Label htmlFor="budget-800">R$ 500 - R$ 800</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="1000+" id="budget-1000" />
-                    <Label htmlFor="budget-1000">Mais de R$ 800</Label>
+                    <Label htmlFor="budget-800" className="cursor-pointer flex-1">
+                      <div className="font-medium">R$ 500+</div>
+                      <div className="text-sm text-muted-foreground">Sem limitações</div>
+                    </Label>
                   </div>
                 </RadioGroup>
               </div>
 
-              <div className="bg-secondary/20 p-4 rounded-lg">
-                <h4 className="font-medium mb-2">O que está incluído:</h4>
-                <ul className="text-sm text-muted-foreground space-y-1">
-                  <li>• Todos os alimentos da sua dieta</li>
-                  <li>• Suplementos recomendados</li>
-                  <li>• Lista de compras otimizada</li>
-                  <li>• Opções de substitutos mais baratos</li>
-                </ul>
+              <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
+                <p className="text-sm text-center text-muted-foreground">
+                  💡 Nosso algoritmo criará um plano otimizado para seu or��amento
+                </p>
               </div>
-            </CardContent>
-          </Card>
+            </div>
+          </div>
         );
 
       default:
@@ -359,50 +316,52 @@ export default function Onboarding() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 flex flex-col items-center justify-center p-4">
-      <div className="w-full max-w-4xl">
-        {/* Header */}
-        <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary mb-4">
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Voltar para home
-          </Link>
-          <h1 className="text-3xl font-bold mb-2">Configure seu perfil</h1>
-          <p className="text-muted-foreground">
-            Etapa {currentStep} de {totalSteps} - Vamos criar seu plano personalizado
-          </p>
-        </div>
+    <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 flex flex-col">
+      {/* Header */}
+      <div className="p-6">
+        <Link to="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary">
+          <ArrowLeft className="h-4 w-4 mr-2" />
+          Voltar
+        </Link>
+      </div>
 
-        {/* Progress Bar */}
-        <div className="mb-8">
-          <Progress value={progress} className="w-full" />
-        </div>
+      <div className="flex-1 flex flex-col items-center justify-center p-6">
+        <div className="w-full max-w-2xl">
+          {/* Progress */}
+          <div className="mb-12">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm font-medium">Etapa {currentStep} de {totalSteps}</span>
+              <span className="text-sm text-muted-foreground">{Math.round(progress)}%</span>
+            </div>
+            <Progress value={progress} className="h-2" />
+          </div>
 
-        {/* Current Step */}
-        <div className="flex justify-center mb-8">
-          {renderStep()}
-        </div>
+          {/* Step Content */}
+          <div className="mb-12">
+            {renderStep()}
+          </div>
 
-        {/* Navigation */}
-        <div className="flex justify-between max-w-2xl mx-auto">
-          <Button
-            variant="outline"
-            onClick={handleBack}
-            disabled={currentStep === 1}
-            className="flex items-center gap-2"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Voltar
-          </Button>
-          
-          <Button
-            onClick={handleNext}
-            disabled={!isStepValid()}
-            className="flex items-center gap-2"
-          >
-            {currentStep === totalSteps ? "Criar Meu Plano" : "Próximo"}
-            <ArrowRight className="h-4 w-4" />
-          </Button>
+          {/* Navigation */}
+          <div className="flex justify-between">
+            <Button
+              variant="outline"
+              onClick={handleBack}
+              disabled={currentStep === 1}
+              className="flex items-center gap-2"
+            >
+              <ArrowLeft className="h-4 w-4" />
+              Voltar
+            </Button>
+            
+            <Button
+              onClick={handleNext}
+              disabled={!isStepValid()}
+              className="flex items-center gap-2 px-8"
+            >
+              {currentStep === totalSteps ? "🚀 Criar Plano" : "Próximo"}
+              <ArrowRight className="h-4 w-4" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>
