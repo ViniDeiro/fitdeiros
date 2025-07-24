@@ -289,9 +289,11 @@ export default function Index() {
                       </li>
                     ))}
                   </ul>
-                  <Button className="w-full" variant={plan.popular ? "default" : "outline"}>
-                    {plan.popular ? "Começar Agora" : "Escolher Plano"}
-                  </Button>
+                  <Link to="/onboarding">
+                    <Button className="w-full" variant={plan.popular ? "default" : "outline"}>
+                      {plan.popular ? "Começar Agora" : "Escolher Plano"}
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             ))}
