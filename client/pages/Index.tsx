@@ -343,10 +343,12 @@ export default function Index() {
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
             Comece hoje mesmo com seu plano personalizado. Primeira semana totalmente grátis.
           </p>
-          <Button size="lg" variant="secondary" className="text-lg px-8">
-            Criar Meu Plano Grátis
-            <ArrowRight className="ml-2 h-5 w-5" />
-          </Button>
+          <Link to="/onboarding">
+            <Button size="lg" variant="secondary" className="text-lg px-8">
+              Criar Meu Plano Grátis
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+          </Link>
           <p className="text-sm mt-4 opacity-75">
             Sem cartão de crédito • Sem compromisso • Cancele a qualquer momento
           </p>
