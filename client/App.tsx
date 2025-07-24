@@ -10,6 +10,8 @@ import NotFound from "./pages/NotFound";
 import Onboarding from "./pages/Onboarding";
 import Dashboard from "./pages/Dashboard";
 import Treino from "./pages/Treino";
+import Dieta from "./pages/Dieta";
+import Compras from "./pages/Compras";
 
 const queryClient = new QueryClient();
 
