@@ -1,14 +1,20 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  Dumbbell, 
-  UtensilsCrossed, 
-  ShoppingCart, 
-  TrendingUp, 
+import {
+  Dumbbell,
+  UtensilsCrossed,
+  ShoppingCart,
+  TrendingUp,
   Calendar,
   Clock,
   Target,
@@ -16,7 +22,7 @@ import {
   Bell,
   Settings,
   User,
-  ArrowRight
+  ArrowRight,
 } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -48,16 +54,16 @@ export default function Dashboard() {
     workoutsCompleted: 8,
     weeklyGoal: 4,
     weightProgress: 2.3,
-    nextMilestone: "65kg"
+    nextMilestone: "65kg",
   });
 
   useEffect(() => {
-    const savedProfile = localStorage.getItem('userProfile');
+    const savedProfile = localStorage.getItem("userProfile");
     if (savedProfile) {
       setProfile(JSON.parse(savedProfile));
     } else {
       // If no profile, redirect to onboarding
-      navigate('/onboarding');
+      navigate("/onboarding");
     }
   }, [navigate]);
 
@@ -66,7 +72,7 @@ export default function Dashboard() {
       "Você está indo muito bem! Continue assim! 💪",
       "Cada treino te deixa mais próximo do seu objetivo! 🎯",
       "Sua dedicação está fazendo a diferença! ⭐",
-      "Resultados incríveis vêm com consistência! 🚀"
+      "Resultados incríveis vêm com consistência! 🚀",
     ];
     return messages[Math.floor(Math.random() * messages.length)];
   };
@@ -76,8 +82,8 @@ export default function Dashboard() {
     const current = parseFloat(profile.currentWeight);
     const target = parseFloat(profile.targetWeight);
     const progress = stats.weightProgress;
-    
-    if (profile.goal === 'ganhar-peso') {
+
+    if (profile.goal === "ganhar-peso") {
       return (progress / (target - current)) * 100;
     } else {
       return (progress / Math.abs(target - current)) * 100;
@@ -87,7 +93,7 @@ export default function Dashboard() {
   const upcomingWorkouts = [
     { day: "Hoje", type: "Peito e Tríceps", time: "18:00", completed: false },
     { day: "Amanhã", type: "Costas e Bíceps", time: "18:00", completed: false },
-    { day: "Sexta", type: "Pernas e Glúteos", time: "18:00", completed: false }
+    { day: "Sexta", type: "Pernas e Glúteos", time: "18:00", completed: false },
   ];
 
   const todayMeals = [
@@ -95,7 +101,7 @@ export default function Dashboard() {
     { meal: "Lanche manhã", calories: 200, completed: true },
     { meal: "Almoço", calories: 650, completed: false },
     { meal: "Lanche tarde", calories: 300, completed: false },
-    { meal: "Jantar", calories: 550, completed: false }
+    { meal: "Jantar", calories: 550, completed: false },
   ];
 
   if (!profile) {
@@ -119,13 +125,38 @@ export default function Dashboard() {
               <Dumbbell className="h-8 w-8 text-primary" />
               <span className="text-xl font-bold">FitPlan</span>
             </Link>
-            
+
             <nav className="hidden md:flex items-center gap-6">
-              <Link to="/dashboard" className="text-sm font-medium text-primary">Dashboard</Link>
-              <Link to="/treino" className="text-sm font-medium hover:text-primary transition-colors">Treino</Link>
-              <Link to="/dieta" className="text-sm font-medium hover:text-primary transition-colors">Dieta</Link>
-              <Link to="/compras" className="text-sm font-medium hover:text-primary transition-colors">Compras</Link>
-              <Link to="/progresso" className="text-sm font-medium hover:text-primary transition-colors">Progresso</Link>
+              <Link
+                to="/dashboard"
+                className="text-sm font-medium text-primary"
+              >
+                Dashboard
+              </Link>
+              <Link
+                to="/treino"
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                Treino
+              </Link>
+              <Link
+                to="/dieta"
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                Dieta
+              </Link>
+              <Link
+                to="/compras"
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                Compras
+              </Link>
+              <Link
+                to="/progresso"
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                Progresso
+              </Link>
             </nav>
 
             <div className="flex items-center gap-4">
@@ -137,7 +168,7 @@ export default function Dashboard() {
               </Button>
               <Button variant="outline" size="sm">
                 <User className="h-4 w-4 mr-2" />
-                {profile.name.split(' ')[0]}
+                {profile.name.split(" ")[0]}
               </Button>
             </div>
           </div>
@@ -148,20 +179,26 @@ export default function Dashboard() {
         {/* Welcome Section */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold mb-2">
-            Olá, {profile.name.split(' ')[0]}! 👋
+            Olá, {profile.name.split(" ")[0]}! 👋
           </h1>
-          <p className="text-muted-foreground text-lg">{getMotivationalMessage()}</p>
+          <p className="text-muted-foreground text-lg">
+            {getMotivationalMessage()}
+          </p>
         </div>
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Progresso Geral</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Progresso Geral
+              </CardTitle>
               <Target className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{Math.round(getProgressPercentage())}%</div>
+              <div className="text-2xl font-bold">
+                {Math.round(getProgressPercentage())}%
+              </div>
               <p className="text-xs text-muted-foreground">
                 {stats.daysCompleted} de {stats.totalDays} dias
               </p>
@@ -171,15 +208,20 @@ export default function Dashboard() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Treinos Semana</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Treinos Semana
+              </CardTitle>
               <Dumbbell className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
-              <div className="text-2xl font-bold">{stats.workoutsCompleted}/{stats.weeklyGoal}</div>
-              <p className="text-xs text-muted-foreground">
-                Meta semanal
-              </p>
-              <Progress value={(stats.workoutsCompleted / stats.weeklyGoal) * 100} className="mt-2" />
+              <div className="text-2xl font-bold">
+                {stats.workoutsCompleted}/{stats.weeklyGoal}
+              </div>
+              <p className="text-xs text-muted-foreground">Meta semanal</p>
+              <Progress
+                value={(stats.workoutsCompleted / stats.weeklyGoal) * 100}
+                className="mt-2"
+              />
             </CardContent>
           </Card>
 
@@ -190,10 +232,14 @@ export default function Dashboard() {
             </CardHeader>
             <CardContent>
               <div className="text-2xl font-bold">
-                {(parseFloat(profile.currentWeight) + stats.weightProgress).toFixed(1)}kg
+                {(
+                  parseFloat(profile.currentWeight) + stats.weightProgress
+                ).toFixed(1)}
+                kg
               </div>
               <p className="text-xs text-muted-foreground">
-                {stats.weightProgress > 0 ? '+' : ''}{stats.weightProgress}kg este mês
+                {stats.weightProgress > 0 ? "+" : ""}
+                {stats.weightProgress}kg este mês
               </p>
               <div className="flex items-center text-xs text-primary mt-1">
                 <TrendingUp className="h-3 w-3 mr-1" />
@@ -204,7 +250,9 @@ export default function Dashboard() {
 
           <Card>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Próximo Marco</CardTitle>
+              <CardTitle className="text-sm font-medium">
+                Próximo Marco
+              </CardTitle>
               <Award className="h-4 w-4 text-muted-foreground" />
             </CardHeader>
             <CardContent>
@@ -234,19 +282,28 @@ export default function Dashboard() {
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                   <Link to="/treino">
-                    <Button className="w-full h-20 flex flex-col gap-2" variant="outline">
+                    <Button
+                      className="w-full h-20 flex flex-col gap-2"
+                      variant="outline"
+                    >
                       <Dumbbell className="h-8 w-8" />
                       <span>Meu Treino</span>
                     </Button>
                   </Link>
                   <Link to="/dieta">
-                    <Button className="w-full h-20 flex flex-col gap-2" variant="outline">
+                    <Button
+                      className="w-full h-20 flex flex-col gap-2"
+                      variant="outline"
+                    >
                       <UtensilsCrossed className="h-8 w-8" />
                       <span>Minha Dieta</span>
                     </Button>
                   </Link>
                   <Link to="/compras">
-                    <Button className="w-full h-20 flex flex-col gap-2" variant="outline">
+                    <Button
+                      className="w-full h-20 flex flex-col gap-2"
+                      variant="outline"
+                    >
                       <ShoppingCart className="h-8 w-8" />
                       <span>Lista de Compras</span>
                     </Button>
@@ -269,11 +326,14 @@ export default function Dashboard() {
                     <TabsTrigger value="treino">Treino</TabsTrigger>
                     <TabsTrigger value="dieta">Refeições</TabsTrigger>
                   </TabsList>
-                  
+
                   <TabsContent value="treino" className="space-y-4">
                     <div className="space-y-3">
                       {upcomingWorkouts.slice(0, 1).map((workout, index) => (
-                        <div key={index} className="flex items-center justify-between p-4 border rounded-lg">
+                        <div
+                          key={index}
+                          className="flex items-center justify-between p-4 border rounded-lg"
+                        >
                           <div className="flex items-center gap-3">
                             <div className="w-2 h-2 bg-primary rounded-full"></div>
                             <div>
@@ -292,19 +352,28 @@ export default function Dashboard() {
                       ))}
                     </div>
                   </TabsContent>
-                  
+
                   <TabsContent value="dieta" className="space-y-4">
                     <div className="space-y-3">
                       {todayMeals.map((meal, index) => (
-                        <div key={index} className="flex items-center justify-between p-3 border rounded-lg">
+                        <div
+                          key={index}
+                          className="flex items-center justify-between p-3 border rounded-lg"
+                        >
                           <div className="flex items-center gap-3">
-                            <div className={`w-2 h-2 rounded-full ${meal.completed ? 'bg-green-500' : 'bg-muted-foreground'}`}></div>
+                            <div
+                              className={`w-2 h-2 rounded-full ${meal.completed ? "bg-green-500" : "bg-muted-foreground"}`}
+                            ></div>
                             <div>
                               <div className="font-medium">{meal.meal}</div>
-                              <div className="text-sm text-muted-foreground">{meal.calories} kcal</div>
+                              <div className="text-sm text-muted-foreground">
+                                {meal.calories} kcal
+                              </div>
                             </div>
                           </div>
-                          <Badge variant={meal.completed ? "default" : "outline"}>
+                          <Badge
+                            variant={meal.completed ? "default" : "outline"}
+                          >
                             {meal.completed ? "✓" : "Pendente"}
                           </Badge>
                         </div>
@@ -325,10 +394,15 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent className="space-y-4">
                 {upcomingWorkouts.map((workout, index) => (
-                  <div key={index} className="flex items-center justify-between text-sm">
+                  <div
+                    key={index}
+                    className="flex items-center justify-between text-sm"
+                  >
                     <div>
                       <div className="font-medium">{workout.day}</div>
-                      <div className="text-muted-foreground">{workout.type}</div>
+                      <div className="text-muted-foreground">
+                        {workout.type}
+                      </div>
                     </div>
                     <div className="text-muted-foreground">{workout.time}</div>
                   </div>
@@ -362,9 +436,12 @@ export default function Dashboard() {
               </CardHeader>
               <CardContent>
                 <div className="text-sm">
-                  <p className="mb-2">💡 <strong>Hidratação é fundamental!</strong></p>
+                  <p className="mb-2">
+                    💡 <strong>Hidratação é fundamental!</strong>
+                  </p>
                   <p className="text-muted-foreground">
-                    Beba pelo menos 2-3 litros de água por dia para otimizar seus resultados.
+                    Beba pelo menos 2-3 litros de água por dia para otimizar
+                    seus resultados.
                   </p>
                 </div>
               </CardContent>

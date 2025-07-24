@@ -1,7 +1,25 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Check, Dumbbell, UtensilsCrossed, ShoppingCart, Clock, Target, TrendingUp, Star, ArrowRight, Menu, X } from "lucide-react";
+import {
+  Check,
+  Dumbbell,
+  UtensilsCrossed,
+  ShoppingCart,
+  Clock,
+  Target,
+  TrendingUp,
+  Star,
+  ArrowRight,
+  Menu,
+  X,
+} from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -12,33 +30,39 @@ export default function Index() {
     {
       icon: <Dumbbell className="h-8 w-8 text-primary" />,
       title: "Treinos Personalizados",
-      description: "Planos de treino específicos para seu biotipo e objetivos, com progressão inteligente para alcançar seus resultados."
+      description:
+        "Planos de treino específicos para seu biotipo e objetivos, com progressão inteligente para alcançar seus resultados.",
     },
     {
       icon: <UtensilsCrossed className="h-8 w-8 text-primary" />,
       title: "Dieta Personalizada",
-      description: "Cardápios únicos baseados no seu orçamento, preferências e necessidades nutricionais específicas."
+      description:
+        "Cardápios únicos baseados no seu orçamento, preferências e necessidades nutricionais específicas.",
     },
     {
       icon: <ShoppingCart className="h-8 w-8 text-primary" />,
       title: "Lista de Compras",
-      description: "Listas automáticas com todos os alimentos e suplementos necessários, otimizadas para seu orçamento."
+      description:
+        "Listas automáticas com todos os alimentos e suplementos necessários, otimizadas para seu orçamento.",
     },
     {
       icon: <Clock className="h-8 w-8 text-primary" />,
       title: "Cronograma Realista",
-      description: "Estimativa precisa de quando você alcançará seus objetivos, com marcos intermediários."
+      description:
+        "Estimativa precisa de quando você alcançará seus objetivos, com marcos intermediários.",
     },
     {
       icon: <Target className="h-8 w-8 text-primary" />,
       title: "Metas Específicas",
-      description: "Definição clara de objetivos baseados em seu biotipo, peso atual e peso desejado."
+      description:
+        "Definição clara de objetivos baseados em seu biotipo, peso atual e peso desejado.",
     },
     {
       icon: <TrendingUp className="h-8 w-8 text-primary" />,
       title: "Acompanhamento",
-      description: "Monitoramento do progresso com ajustes automáticos na dieta e treino conforme necessário."
-    }
+      description:
+        "Monitoramento do progresso com ajustes automáticos na dieta e treino conforme necessário.",
+    },
   ];
 
   const plans = [
@@ -51,9 +75,9 @@ export default function Index() {
         "Plano de treino personalizado",
         "Dieta básica personalizada",
         "Lista de compras semanal",
-        "Suporte por chat"
+        "Suporte por chat",
       ],
-      popular: false
+      popular: false,
     },
     {
       name: "Completo",
@@ -66,9 +90,9 @@ export default function Index() {
         "Variações de refeições",
         "Ajustes mensais automáticos",
         "Cronograma de progresso",
-        "Suporte prioritário"
+        "Suporte prioritário",
       ],
-      popular: true
+      popular: true,
     },
     {
       name: "Premium",
@@ -81,31 +105,34 @@ export default function Index() {
         "Ajustes em tempo real",
         "Análise de bioimpedância",
         "Planos de suplementação",
-        "Acesso antecipado a novidades"
+        "Acesso antecipado a novidades",
       ],
-      popular: false
-    }
+      popular: false,
+    },
   ];
 
   const testimonials = [
     {
       name: "Maria Silva",
       role: "Ectomorfa • 65kg → 70kg",
-      content: "Em 6 meses consegui ganhar os 5kg que sempre sonhei! O plano foi perfeito para meu orçamento de R$ 400 mensais.",
-      rating: 5
+      content:
+        "Em 6 meses consegui ganhar os 5kg que sempre sonhei! O plano foi perfeito para meu orçamento de R$ 400 mensais.",
+      rating: 5,
     },
     {
       name: "João Santos",
       role: "Endomorfo • 95kg → 80kg",
-      content: "Perdi 15kg de forma saudável e sustentável. As receitas são incríveis e nunca fico enjoado da comida.",
-      rating: 5
+      content:
+        "Perdi 15kg de forma saudável e sustentável. As receitas são incríveis e nunca fico enjoado da comida.",
+      rating: 5,
     },
     {
       name: "Ana Costa",
       role: "Mesomorfa • Definição",
-      content: "O treino personalizado me ajudou a definir o corpo que sempre quis. Resultados visíveis em 3 meses!",
-      rating: 5
-    }
+      content:
+        "O treino personalizado me ajudou a definir o corpo que sempre quis. Resultados visíveis em 3 meses!",
+      rating: 5,
+    },
   ];
 
   return (
@@ -118,13 +145,30 @@ export default function Index() {
               <Dumbbell className="h-8 w-8 text-primary" />
               <span className="text-xl font-bold">FitPlan</span>
             </div>
-            
+
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-8">
-              <a href="#features" className="text-sm font-medium hover:text-primary transition-colors">Recursos</a>
-              <a href="#pricing" className="text-sm font-medium hover:text-primary transition-colors">Preços</a>
-              <a href="#testimonials" className="text-sm font-medium hover:text-primary transition-colors">Depoimentos</a>
-              <Button variant="outline" size="sm">Entrar</Button>
+              <a
+                href="#features"
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                Recursos
+              </a>
+              <a
+                href="#pricing"
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                Preços
+              </a>
+              <a
+                href="#testimonials"
+                className="text-sm font-medium hover:text-primary transition-colors"
+              >
+                Depoimentos
+              </a>
+              <Button variant="outline" size="sm">
+                Entrar
+              </Button>
               <Button size="sm">Começar Agora</Button>
             </nav>
 
@@ -133,7 +177,11 @@ export default function Index() {
               className="md:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              {mobileMenuOpen ? (
+                <X className="h-6 w-6" />
+              ) : (
+                <Menu className="h-6 w-6" />
+              )}
             </button>
           </div>
         </div>
@@ -142,11 +190,28 @@ export default function Index() {
         {mobileMenuOpen && (
           <div className="md:hidden border-t bg-background/95 backdrop-blur">
             <div className="container mx-auto px-4 py-4 space-y-4">
-              <a href="#features" className="block text-sm font-medium hover:text-primary transition-colors">Recursos</a>
-              <a href="#pricing" className="block text-sm font-medium hover:text-primary transition-colors">Preços</a>
-              <a href="#testimonials" className="block text-sm font-medium hover:text-primary transition-colors">Depoimentos</a>
+              <a
+                href="#features"
+                className="block text-sm font-medium hover:text-primary transition-colors"
+              >
+                Recursos
+              </a>
+              <a
+                href="#pricing"
+                className="block text-sm font-medium hover:text-primary transition-colors"
+              >
+                Preços
+              </a>
+              <a
+                href="#testimonials"
+                className="block text-sm font-medium hover:text-primary transition-colors"
+              >
+                Depoimentos
+              </a>
               <div className="flex flex-col gap-2 pt-4 border-t">
-                <Button variant="outline" size="sm">Entrar</Button>
+                <Button variant="outline" size="sm">
+                  Entrar
+                </Button>
                 <Button size="sm">Começar Agora</Button>
               </div>
             </div>
@@ -166,8 +231,9 @@ export default function Index() {
               <span className="text-primary block">Personalizados por IA</span>
             </h1>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Alcance seus objetivos com planos únicos baseados no seu biotipo, orçamento e metas. 
-              De ectomorfo para 70kg ou qualquer objetivo que tenha.
+              Alcance seus objetivos com planos únicos baseados no seu biotipo,
+              orçamento e metas. De ectomorfo para 70kg ou qualquer objetivo que
+              tenha.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/onboarding">
@@ -181,7 +247,8 @@ export default function Index() {
               </Button>
             </div>
             <p className="text-sm text-muted-foreground mt-6">
-              ✓ Sem compromisso • ✓ Primeira semana grátis • ✓ Resultados garantidos
+              ✓ Sem compromisso • ✓ Primeira semana grátis • ✓ Resultados
+              garantidos
             </p>
           </div>
         </div>
@@ -195,14 +262,18 @@ export default function Index() {
               Tudo que Você Precisa em Um Só Lugar
             </h2>
             <p className="text-xl text-muted-foreground">
-              Nossa plataforma usa inteligência artificial para criar o plano perfeito para você,
-              considerando todos os aspectos da sua jornada fitness.
+              Nossa plataforma usa inteligência artificial para criar o plano
+              perfeito para você, considerando todos os aspectos da sua jornada
+              fitness.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
-              <Card key={index} className="border-2 hover:border-primary/20 transition-colors">
+              <Card
+                key={index}
+                className="border-2 hover:border-primary/20 transition-colors"
+              >
                 <CardHeader>
                   <div className="flex items-center gap-4">
                     {feature.icon}
@@ -228,25 +299,41 @@ export default function Index() {
               Como Funciona
             </h2>
             <p className="text-xl text-muted-foreground">
-              Em apenas 3 passos simples, você terá seu plano completo personalizado
+              Em apenas 3 passos simples, você terá seu plano completo
+              personalizado
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">1</div>
+              <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                1
+              </div>
               <h3 className="text-xl font-semibold mb-2">Conte Sobre Você</h3>
-              <p className="text-muted-foreground">Biotipo, peso atual, peso desejado e orçamento para alimentação</p>
+              <p className="text-muted-foreground">
+                Biotipo, peso atual, peso desejado e orçamento para alimentação
+              </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">2</div>
+              <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                2
+              </div>
               <h3 className="text-xl font-semibold mb-2">IA Cria Seu Plano</h3>
-              <p className="text-muted-foreground">Treino personalizado, dieta com receitas e lista de compras otimizada</p>
+              <p className="text-muted-foreground">
+                Treino personalizado, dieta com receitas e lista de compras
+                otimizada
+              </p>
             </div>
             <div className="text-center">
-              <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">3</div>
-              <h3 className="text-xl font-semibold mb-2">Alcance Seus Objetivos</h3>
-              <p className="text-muted-foreground">Siga o plano e acompanhe seu progresso com ajustes automáticos</p>
+              <div className="w-16 h-16 bg-primary text-primary-foreground rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                3
+              </div>
+              <h3 className="text-xl font-semibold mb-2">
+                Alcance Seus Objetivos
+              </h3>
+              <p className="text-muted-foreground">
+                Siga o plano e acompanhe seu progresso com ajustes automáticos
+              </p>
             </div>
           </div>
         </div>
@@ -266,7 +353,10 @@ export default function Index() {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {plans.map((plan, index) => (
-              <Card key={index} className={`relative ${plan.popular ? 'border-primary shadow-lg scale-105' : ''}`}>
+              <Card
+                key={index}
+                className={`relative ${plan.popular ? "border-primary shadow-lg scale-105" : ""}`}
+              >
                 {plan.popular && (
                   <Badge className="absolute -top-3 left-1/2 transform -translate-x-1/2">
                     Mais Popular
@@ -276,21 +366,29 @@ export default function Index() {
                   <CardTitle className="text-2xl">{plan.name}</CardTitle>
                   <div className="text-3xl font-bold">
                     {plan.price}
-                    <span className="text-base font-normal text-muted-foreground">{plan.period}</span>
+                    <span className="text-base font-normal text-muted-foreground">
+                      {plan.period}
+                    </span>
                   </div>
                   <CardDescription>{plan.description}</CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <ul className="space-y-2">
                     {plan.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-center gap-2">
+                      <li
+                        key={featureIndex}
+                        className="flex items-center gap-2"
+                      >
                         <Check className="h-4 w-4 text-primary flex-shrink-0" />
                         <span className="text-sm">{feature}</span>
                       </li>
                     ))}
                   </ul>
                   <Link to="/onboarding">
-                    <Button className="w-full" variant={plan.popular ? "default" : "outline"}>
+                    <Button
+                      className="w-full"
+                      variant={plan.popular ? "default" : "outline"}
+                    >
                       {plan.popular ? "Começar Agora" : "Escolher Plano"}
                     </Button>
                   </Link>
@@ -319,14 +417,19 @@ export default function Index() {
                 <CardHeader>
                   <div className="flex items-center gap-1 mb-2">
                     {[...Array(testimonial.rating)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                      <Star
+                        key={i}
+                        className="h-4 w-4 fill-yellow-400 text-yellow-400"
+                      />
                     ))}
                   </div>
                   <CardTitle className="text-lg">{testimonial.name}</CardTitle>
                   <CardDescription>{testimonial.role}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground italic">"{testimonial.content}"</p>
+                  <p className="text-muted-foreground italic">
+                    "{testimonial.content}"
+                  </p>
                 </CardContent>
               </Card>
             ))}
@@ -341,7 +444,8 @@ export default function Index() {
             Pronto para Transformar Seu Corpo?
           </h2>
           <p className="text-xl mb-8 opacity-90 max-w-2xl mx-auto">
-            Comece hoje mesmo com seu plano personalizado. Primeira semana totalmente grátis.
+            Comece hoje mesmo com seu plano personalizado. Primeira semana
+            totalmente grátis.
           </p>
           <Link to="/onboarding">
             <Button size="lg" variant="secondary" className="text-lg px-8">
@@ -365,23 +469,48 @@ export default function Index() {
                 <span className="text-xl font-bold">FitPlan</span>
               </div>
               <p className="text-muted-foreground mb-4">
-                Plataforma de IA que cria treinos e dietas personalizadas para seus objetivos específicos.
+                Plataforma de IA que cria treinos e dietas personalizadas para
+                seus objetivos específicos.
               </p>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Produto</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-primary transition-colors">Recursos</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Preços</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">API</a></li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Recursos
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Preços
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    API
+                  </a>
+                </li>
               </ul>
             </div>
             <div>
               <h3 className="font-semibold mb-4">Suporte</h3>
               <ul className="space-y-2 text-muted-foreground">
-                <li><a href="#" className="hover:text-primary transition-colors">Central de Ajuda</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Contato</a></li>
-                <li><a href="#" className="hover:text-primary transition-colors">Status</a></li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Central de Ajuda
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Contato
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-primary transition-colors">
+                    Status
+                  </a>
+                </li>
               </ul>
             </div>
           </div>

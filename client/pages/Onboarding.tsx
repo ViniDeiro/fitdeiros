@@ -1,12 +1,31 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Progress } from "@/components/ui/progress";
-import { ArrowLeft, ArrowRight, User, Activity, Target, DollarSign } from "lucide-react";
+import {
+  ArrowLeft,
+  ArrowRight,
+  User,
+  Activity,
+  Target,
+  DollarSign,
+} from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 
 interface UserProfile {
@@ -31,22 +50,22 @@ export default function Onboarding() {
     currentWeight: "",
     targetWeight: "",
     goal: "",
-    budget: ""
+    budget: "",
   });
 
   const totalSteps = 4;
   const progress = (currentStep / totalSteps) * 100;
 
   const updateProfile = (field: keyof UserProfile, value: string) => {
-    setProfile(prev => ({ ...prev, [field]: value }));
+    setProfile((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleNext = () => {
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     } else {
-      localStorage.setItem('userProfile', JSON.stringify(profile));
-      navigate('/dashboard');
+      localStorage.setItem("userProfile", JSON.stringify(profile));
+      navigate("/dashboard");
     }
   };
 
@@ -61,7 +80,9 @@ export default function Onboarding() {
       case 1:
         return profile.name && profile.age && profile.gender;
       case 2:
-        return profile.bodyType && profile.currentWeight && profile.targetWeight;
+        return (
+          profile.bodyType && profile.currentWeight && profile.targetWeight
+        );
       case 3:
         return profile.goal;
       case 4:
@@ -91,11 +112,11 @@ export default function Onboarding() {
                   id="name"
                   placeholder="Seu nome"
                   value={profile.name}
-                  onChange={(e) => updateProfile('name', e.target.value)}
+                  onChange={(e) => updateProfile("name", e.target.value)}
                   className="text-center"
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="age">Qual sua idade?</Label>
                 <Input
@@ -103,7 +124,7 @@ export default function Onboarding() {
                   type="number"
                   placeholder="25"
                   value={profile.age}
-                  onChange={(e) => updateProfile('age', e.target.value)}
+                  onChange={(e) => updateProfile("age", e.target.value)}
                   className="text-center"
                 />
               </div>
@@ -112,16 +133,26 @@ export default function Onboarding() {
                 <Label>Gênero</Label>
                 <RadioGroup
                   value={profile.gender}
-                  onValueChange={(value) => updateProfile('gender', value)}
+                  onValueChange={(value) => updateProfile("gender", value)}
                   className="grid grid-cols-2 gap-4"
                 >
                   <div className="flex items-center space-x-2 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="masculino" id="masculino" />
-                    <Label htmlFor="masculino" className="cursor-pointer font-medium">Masculino</Label>
+                    <Label
+                      htmlFor="masculino"
+                      className="cursor-pointer font-medium"
+                    >
+                      Masculino
+                    </Label>
                   </div>
                   <div className="flex items-center space-x-2 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="feminino" id="feminino" />
-                    <Label htmlFor="feminino" className="cursor-pointer font-medium">Feminino</Label>
+                    <Label
+                      htmlFor="feminino"
+                      className="cursor-pointer font-medium"
+                    >
+                      Feminino
+                    </Label>
                   </div>
                 </RadioGroup>
               </div>
@@ -145,28 +176,43 @@ export default function Onboarding() {
                 <Label>Qual é o seu biotipo?</Label>
                 <RadioGroup
                   value={profile.bodyType}
-                  onValueChange={(value) => updateProfile('bodyType', value)}
+                  onValueChange={(value) => updateProfile("bodyType", value)}
                   className="space-y-3"
                 >
                   <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="ectomorfo" id="ectomorfo" />
-                    <Label htmlFor="ectomorfo" className="cursor-pointer flex-1">
+                    <Label
+                      htmlFor="ectomorfo"
+                      className="cursor-pointer flex-1"
+                    >
                       <div className="font-medium">Ectomorfo</div>
-                      <div className="text-sm text-muted-foreground">Magro, dificuldade para ganhar peso</div>
+                      <div className="text-sm text-muted-foreground">
+                        Magro, dificuldade para ganhar peso
+                      </div>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="mesomorfo" id="mesomorfo" />
-                    <Label htmlFor="mesomorfo" className="cursor-pointer flex-1">
+                    <Label
+                      htmlFor="mesomorfo"
+                      className="cursor-pointer flex-1"
+                    >
                       <div className="font-medium">Mesomorfo</div>
-                      <div className="text-sm text-muted-foreground">Atlético, músculos definidos</div>
+                      <div className="text-sm text-muted-foreground">
+                        Atlético, músculos definidos
+                      </div>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="endomorfo" id="endomorfo" />
-                    <Label htmlFor="endomorfo" className="cursor-pointer flex-1">
+                    <Label
+                      htmlFor="endomorfo"
+                      className="cursor-pointer flex-1"
+                    >
                       <div className="font-medium">Endomorfo</div>
-                      <div className="text-sm text-muted-foreground">Facilidade para ganhar peso</div>
+                      <div className="text-sm text-muted-foreground">
+                        Facilidade para ganhar peso
+                      </div>
                     </Label>
                   </div>
                 </RadioGroup>
@@ -180,7 +226,9 @@ export default function Onboarding() {
                     type="number"
                     placeholder="70"
                     value={profile.currentWeight}
-                    onChange={(e) => updateProfile('currentWeight', e.target.value)}
+                    onChange={(e) =>
+                      updateProfile("currentWeight", e.target.value)
+                    }
                     className="text-center"
                   />
                 </div>
@@ -191,7 +239,9 @@ export default function Onboarding() {
                     type="number"
                     placeholder="75"
                     value={profile.targetWeight}
-                    onChange={(e) => updateProfile('targetWeight', e.target.value)}
+                    onChange={(e) =>
+                      updateProfile("targetWeight", e.target.value)
+                    }
                     className="text-center"
                   />
                 </div>
@@ -206,44 +256,62 @@ export default function Onboarding() {
             <div className="text-center mb-8">
               <Target className="h-16 w-16 text-primary mx-auto mb-4" />
               <h2 className="text-2xl font-bold mb-2">Seu objetivo</h2>
-              <p className="text-muted-foreground">
-                O que você quer alcançar?
-              </p>
+              <p className="text-muted-foreground">O que você quer alcançar?</p>
             </div>
 
             <div className="space-y-6">
               <div className="space-y-4">
                 <RadioGroup
                   value={profile.goal}
-                  onValueChange={(value) => updateProfile('goal', value)}
+                  onValueChange={(value) => updateProfile("goal", value)}
                   className="space-y-3"
                 >
                   <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="ganhar-peso" id="ganhar-peso" />
-                    <Label htmlFor="ganhar-peso" className="cursor-pointer flex-1">
+                    <Label
+                      htmlFor="ganhar-peso"
+                      className="cursor-pointer flex-1"
+                    >
                       <div className="font-medium">💪 Ganhar peso</div>
-                      <div className="text-sm text-muted-foreground">Aumentar massa muscular</div>
+                      <div className="text-sm text-muted-foreground">
+                        Aumentar massa muscular
+                      </div>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="perder-peso" id="perder-peso" />
-                    <Label htmlFor="perder-peso" className="cursor-pointer flex-1">
+                    <Label
+                      htmlFor="perder-peso"
+                      className="cursor-pointer flex-1"
+                    >
                       <div className="font-medium">🔥 Perder peso</div>
-                      <div className="text-sm text-muted-foreground">Queimar gordura</div>
+                      <div className="text-sm text-muted-foreground">
+                        Queimar gordura
+                      </div>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="tonificar" id="tonificar" />
-                    <Label htmlFor="tonificar" className="cursor-pointer flex-1">
+                    <Label
+                      htmlFor="tonificar"
+                      className="cursor-pointer flex-1"
+                    >
                       <div className="font-medium">✨ Tonificar</div>
-                      <div className="text-sm text-muted-foreground">Definir músculos</div>
+                      <div className="text-sm text-muted-foreground">
+                        Definir músculos
+                      </div>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="manutencao" id="manutencao" />
-                    <Label htmlFor="manutencao" className="cursor-pointer flex-1">
+                    <Label
+                      htmlFor="manutencao"
+                      className="cursor-pointer flex-1"
+                    >
                       <div className="font-medium">⚖️ Manter peso</div>
-                      <div className="text-sm text-muted-foreground">Peso atual está bom</div>
+                      <div className="text-sm text-muted-foreground">
+                        Peso atual está bom
+                      </div>
                     </Label>
                   </div>
                 </RadioGroup>
@@ -267,35 +335,55 @@ export default function Onboarding() {
               <div className="space-y-4">
                 <RadioGroup
                   value={profile.budget}
-                  onValueChange={(value) => updateProfile('budget', value)}
+                  onValueChange={(value) => updateProfile("budget", value)}
                   className="space-y-3"
                 >
                   <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="200" id="budget-200" />
-                    <Label htmlFor="budget-200" className="cursor-pointer flex-1">
+                    <Label
+                      htmlFor="budget-200"
+                      className="cursor-pointer flex-1"
+                    >
                       <div className="font-medium">Até R$ 200</div>
-                      <div className="text-sm text-muted-foreground">Básico essencial</div>
+                      <div className="text-sm text-muted-foreground">
+                        Básico essencial
+                      </div>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="300" id="budget-300" />
-                    <Label htmlFor="budget-300" className="cursor-pointer flex-1">
+                    <Label
+                      htmlFor="budget-300"
+                      className="cursor-pointer flex-1"
+                    >
                       <div className="font-medium">R$ 200 - R$ 300</div>
-                      <div className="text-sm text-muted-foreground">Boa variedade</div>
+                      <div className="text-sm text-muted-foreground">
+                        Boa variedade
+                      </div>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="500" id="budget-500" />
-                    <Label htmlFor="budget-500" className="cursor-pointer flex-1">
+                    <Label
+                      htmlFor="budget-500"
+                      className="cursor-pointer flex-1"
+                    >
                       <div className="font-medium">R$ 300 - R$ 500</div>
-                      <div className="text-sm text-muted-foreground">Mais opções</div>
+                      <div className="text-sm text-muted-foreground">
+                        Mais opções
+                      </div>
                     </Label>
                   </div>
                   <div className="flex items-center space-x-3 border rounded-lg p-4 cursor-pointer hover:bg-secondary/50">
                     <RadioGroupItem value="800" id="budget-800" />
-                    <Label htmlFor="budget-800" className="cursor-pointer flex-1">
+                    <Label
+                      htmlFor="budget-800"
+                      className="cursor-pointer flex-1"
+                    >
                       <div className="font-medium">R$ 500+</div>
-                      <div className="text-sm text-muted-foreground">Sem limitações</div>
+                      <div className="text-sm text-muted-foreground">
+                        Sem limitações
+                      </div>
                     </Label>
                   </div>
                 </RadioGroup>
@@ -303,7 +391,8 @@ export default function Onboarding() {
 
               <div className="bg-primary/5 p-4 rounded-lg border border-primary/20">
                 <p className="text-sm text-center text-muted-foreground">
-                  💡 Nosso algoritmo criará um plano otimizado para seu or��amento
+                  💡 Nosso algoritmo criará um plano otimizado para seu
+                  or��amento
                 </p>
               </div>
             </div>
@@ -319,7 +408,10 @@ export default function Onboarding() {
     <div className="min-h-screen bg-gradient-to-br from-background to-secondary/20 flex flex-col">
       {/* Header */}
       <div className="p-6">
-        <Link to="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-primary">
+        <Link
+          to="/"
+          className="inline-flex items-center text-sm text-muted-foreground hover:text-primary"
+        >
           <ArrowLeft className="h-4 w-4 mr-2" />
           Voltar
         </Link>
@@ -330,16 +422,18 @@ export default function Onboarding() {
           {/* Progress */}
           <div className="mb-12">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium">Etapa {currentStep} de {totalSteps}</span>
-              <span className="text-sm text-muted-foreground">{Math.round(progress)}%</span>
+              <span className="text-sm font-medium">
+                Etapa {currentStep} de {totalSteps}
+              </span>
+              <span className="text-sm text-muted-foreground">
+                {Math.round(progress)}%
+              </span>
             </div>
             <Progress value={progress} className="h-2" />
           </div>
 
           {/* Step Content */}
-          <div className="mb-12">
-            {renderStep()}
-          </div>
+          <div className="mb-12">{renderStep()}</div>
 
           {/* Navigation */}
           <div className="flex justify-between">
@@ -352,7 +446,7 @@ export default function Onboarding() {
               <ArrowLeft className="h-4 w-4" />
               Voltar
             </Button>
-            
+
             <Button
               onClick={handleNext}
               disabled={!isStepValid()}

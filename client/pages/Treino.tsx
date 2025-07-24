@@ -1,25 +1,36 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { 
-  Dumbbell, 
-  Play, 
-  Pause, 
-  RotateCcw, 
-  Timer, 
-  Zap, 
-  Target, 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import {
+  Dumbbell,
+  Play,
+  Pause,
+  RotateCcw,
+  Timer,
+  Zap,
+  Target,
   TrendingUp,
   CheckCircle2,
   Circle,
   ArrowLeft,
   Calendar,
   Clock,
-  User
+  User,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -76,10 +87,10 @@ export default function Treino() {
             "Deite no banco com os halteres nas mãos",
             "Abaixe os halteres controladamente até o peito",
             "Empurre de volta à posição inicial",
-            "Mantenha os ombros estáveis"
+            "Mantenha os ombros estáveis",
           ],
           tips: "Foque na contração do peito e não arqueie demais as costas",
-          completed: true
+          completed: true,
         },
         {
           id: "ex2",
@@ -93,10 +104,10 @@ export default function Treino() {
             "Deite no banco inclinado (30-45°)",
             "Abra os braços em movimento de arco",
             "Sinta o alongamento no peito",
-            "Retorne controladamente"
+            "Retorne controladamente",
           ],
           tips: "Mantenha uma leve flexão nos cotovelos durante todo movimento",
-          completed: true
+          completed: true,
         },
         {
           id: "ex3",
@@ -110,10 +121,10 @@ export default function Treino() {
             "Posição de prancha com mãos afastadas",
             "Desça até o peito quase tocar o chão",
             "Empurre de volta",
-            "Mantenha o core contraído"
+            "Mantenha o core contraído",
           ],
           tips: "Se muito difícil, apoie os joelhos no chão",
-          completed: false
+          completed: false,
         },
         {
           id: "ex4",
@@ -127,10 +138,10 @@ export default function Treino() {
             "Deite no banco com halteres acima do peito",
             "Flexione apenas os cotovelos",
             "Desça em direção à testa",
-            "Estenda de volta"
+            "Estenda de volta",
           ],
           tips: "Mantenha os cotovelos fixos, movimento só no antebraço",
-          completed: false
+          completed: false,
         },
         {
           id: "ex5",
@@ -144,12 +155,12 @@ export default function Treino() {
             "Apoie-se nas paralelas",
             "Desça flexionando os cotovelos",
             "Empurre de volta à posição inicial",
-            "Incline-se ligeiramente para frente"
+            "Incline-se ligeiramente para frente",
           ],
           tips: "Se muito difícil, use uma cadeira ou apoio nos pés",
-          completed: false
-        }
-      ]
+          completed: false,
+        },
+      ],
     },
     {
       id: "day2",
@@ -172,13 +183,13 @@ export default function Treino() {
             "Incline o tronco para frente",
             "Puxe os halteres em direção ao abdome",
             "Aperte as escápulas",
-            "Controle a descida"
+            "Controle a descida",
           ],
           tips: "Mantenha a coluna neutra e foque em puxar com as costas",
-          completed: false
-        }
-      ]
-    }
+          completed: false,
+        },
+      ],
+    },
   ];
 
   // Timer effect
@@ -186,7 +197,7 @@ export default function Treino() {
     let interval: NodeJS.Timeout;
     if (isTimerRunning) {
       interval = setInterval(() => {
-        setTimer(timer => timer + 1);
+        setTimer((timer) => timer + 1);
       }, 1000);
     }
     return () => clearInterval(interval);
@@ -195,7 +206,7 @@ export default function Treino() {
   const formatTime = (seconds: number) => {
     const mins = Math.floor(seconds / 60);
     const secs = seconds % 60;
-    return `${mins}:${secs.toString().padStart(2, '0')}`;
+    return `${mins}:${secs.toString().padStart(2, "0")}`;
   };
 
   const toggleExerciseComplete = (dayId: string, exerciseId: string) => {
@@ -204,7 +215,7 @@ export default function Treino() {
   };
 
   const startRestTimer = (restTime: string) => {
-    const seconds = parseInt(restTime.replace(/\D/g, ''));
+    const seconds = parseInt(restTime.replace(/\D/g, ""));
     setTimer(0);
     setIsTimerRunning(true);
     setTimeout(() => {
@@ -221,7 +232,10 @@ export default function Treino() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-4">
-              <Link to="/dashboard" className="flex items-center gap-2 text-muted-foreground hover:text-primary">
+              <Link
+                to="/dashboard"
+                className="flex items-center gap-2 text-muted-foreground hover:text-primary"
+              >
                 <ArrowLeft className="h-4 w-4" />
                 <span className="hidden sm:block">Dashboard</span>
               </Link>
@@ -230,7 +244,7 @@ export default function Treino() {
                 <span className="text-lg font-semibold">Meu Treino</span>
               </div>
             </div>
-            
+
             <div className="flex items-center gap-4">
               <Badge variant="outline" className="hidden sm:flex">
                 <Calendar className="h-3 w-3 mr-1" />
@@ -251,7 +265,9 @@ export default function Treino() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4">
             <div>
               <h1 className="text-3xl font-bold mb-2">{currentWorkout.name}</h1>
-              <p className="text-muted-foreground">{currentWorkout.day} • {currentWorkout.duration}</p>
+              <p className="text-muted-foreground">
+                {currentWorkout.day} • {currentWorkout.duration}
+              </p>
             </div>
             <div className="flex items-center gap-2 mt-4 sm:mt-0">
               <Badge variant="secondary">{currentWorkout.difficulty}</Badge>
@@ -261,36 +277,53 @@ export default function Treino() {
               </Badge>
             </div>
           </div>
-          
+
           {/* Progress */}
           <Card className="mb-6">
             <CardContent className="pt-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-medium">Progresso do treino</span>
                 <span className="text-sm text-muted-foreground">
-                  {currentWorkout.exercises.filter(ex => ex.completed).length} de {currentWorkout.exercises.length} exercícios
+                  {currentWorkout.exercises.filter((ex) => ex.completed).length}{" "}
+                  de {currentWorkout.exercises.length} exercícios
                 </span>
               </div>
-              <Progress 
-                value={(currentWorkout.exercises.filter(ex => ex.completed).length / currentWorkout.exercises.length) * 100} 
+              <Progress
+                value={
+                  (currentWorkout.exercises.filter((ex) => ex.completed)
+                    .length /
+                    currentWorkout.exercises.length) *
+                  100
+                }
                 className="mb-4"
               />
-              
+
               {/* Quick stats */}
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
-                  <div className="text-2xl font-bold text-primary">{currentWorkout.exercises.length}</div>
-                  <div className="text-xs text-muted-foreground">Exercícios</div>
+                  <div className="text-2xl font-bold text-primary">
+                    {currentWorkout.exercises.length}
+                  </div>
+                  <div className="text-xs text-muted-foreground">
+                    Exercícios
+                  </div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-primary">{currentWorkout.duration}</div>
+                  <div className="text-2xl font-bold text-primary">
+                    {currentWorkout.duration}
+                  </div>
                   <div className="text-xs text-muted-foreground">Duração</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-primary">
-                    {currentWorkout.exercises.reduce((acc, ex) => acc + ex.sets, 0)}
+                    {currentWorkout.exercises.reduce(
+                      (acc, ex) => acc + ex.sets,
+                      0,
+                    )}
                   </div>
-                  <div className="text-xs text-muted-foreground">Séries Total</div>
+                  <div className="text-xs text-muted-foreground">
+                    Séries Total
+                  </div>
                 </div>
               </div>
             </CardContent>
@@ -322,7 +355,10 @@ export default function Treino() {
                             className="p-0 h-6 w-6"
                             onClick={(e) => {
                               e.stopPropagation();
-                              toggleExerciseComplete(currentWorkout.id, exercise.id);
+                              toggleExerciseComplete(
+                                currentWorkout.id,
+                                exercise.id,
+                              );
                             }}
                           >
                             {exercise.completed ? (
@@ -333,13 +369,16 @@ export default function Treino() {
                           </Button>
                           <div className="flex-1 text-left">
                             <div className="flex items-center gap-2">
-                              <span className="font-medium">{index + 1}. {exercise.name}</span>
+                              <span className="font-medium">
+                                {index + 1}. {exercise.name}
+                              </span>
                               <Badge variant="outline" className="text-xs">
                                 {exercise.muscle}
                               </Badge>
                             </div>
                             <div className="text-sm text-muted-foreground">
-                              {exercise.sets} séries • {exercise.reps} reps • {exercise.weight}
+                              {exercise.sets} séries • {exercise.reps} reps •{" "}
+                              {exercise.weight}
                             </div>
                           </div>
                         </div>
@@ -350,19 +389,27 @@ export default function Treino() {
                           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
                             <div>
                               <span className="font-medium">Séries:</span>
-                              <div className="text-lg font-bold text-primary">{exercise.sets}</div>
+                              <div className="text-lg font-bold text-primary">
+                                {exercise.sets}
+                              </div>
                             </div>
                             <div>
                               <span className="font-medium">Repetições:</span>
-                              <div className="text-lg font-bold text-primary">{exercise.reps}</div>
+                              <div className="text-lg font-bold text-primary">
+                                {exercise.reps}
+                              </div>
                             </div>
                             <div>
                               <span className="font-medium">Peso:</span>
-                              <div className="text-lg font-bold text-primary">{exercise.weight}</div>
+                              <div className="text-lg font-bold text-primary">
+                                {exercise.weight}
+                              </div>
                             </div>
                             <div>
                               <span className="font-medium">Descanso:</span>
-                              <div className="text-lg font-bold text-primary">{exercise.rest}</div>
+                              <div className="text-lg font-bold text-primary">
+                                {exercise.rest}
+                              </div>
                             </div>
                           </div>
 
@@ -382,7 +429,9 @@ export default function Treino() {
                               <Zap className="h-4 w-4 text-yellow-500 mt-0.5 flex-shrink-0" />
                               <div>
                                 <div className="font-medium text-sm">Dica:</div>
-                                <div className="text-sm text-muted-foreground">{exercise.tips}</div>
+                                <div className="text-sm text-muted-foreground">
+                                  {exercise.tips}
+                                </div>
                               </div>
                             </div>
                           </div>
@@ -390,11 +439,20 @@ export default function Treino() {
                           {/* Action buttons */}
                           <div className="flex gap-2 pt-2">
                             <Button
-                              variant={exercise.completed ? "outline" : "default"}
+                              variant={
+                                exercise.completed ? "outline" : "default"
+                              }
                               size="sm"
-                              onClick={() => toggleExerciseComplete(currentWorkout.id, exercise.id)}
+                              onClick={() =>
+                                toggleExerciseComplete(
+                                  currentWorkout.id,
+                                  exercise.id,
+                                )
+                              }
                             >
-                              {exercise.completed ? "Concluído" : "Marcar como feito"}
+                              {exercise.completed
+                                ? "Concluído"
+                                : "Marcar como feito"}
                             </Button>
                             <Button
                               variant="outline"
@@ -425,14 +483,20 @@ export default function Treino() {
                 </CardTitle>
               </CardHeader>
               <CardContent className="text-center">
-                <div className="text-4xl font-bold mb-4">{formatTime(timer)}</div>
+                <div className="text-4xl font-bold mb-4">
+                  {formatTime(timer)}
+                </div>
                 <div className="flex gap-2 justify-center">
                   <Button
                     variant="outline"
                     size="sm"
                     onClick={() => setIsTimerRunning(!isTimerRunning)}
                   >
-                    {isTimerRunning ? <Pause className="h-4 w-4" /> : <Play className="h-4 w-4" />}
+                    {isTimerRunning ? (
+                      <Pause className="h-4 w-4" />
+                    ) : (
+                      <Play className="h-4 w-4" />
+                    )}
                   </Button>
                   <Button
                     variant="outline"
@@ -455,16 +519,23 @@ export default function Treino() {
               </CardHeader>
               <CardContent className="space-y-3">
                 {workoutPlan.map((day, index) => (
-                  <div key={day.id} className="flex items-center justify-between p-3 border rounded-lg">
+                  <div
+                    key={day.id}
+                    className="flex items-center justify-between p-3 border rounded-lg"
+                  >
                     <div className="flex-1">
                       <div className="font-medium text-sm">{day.name}</div>
-                      <div className="text-xs text-muted-foreground">{day.day}</div>
+                      <div className="text-xs text-muted-foreground">
+                        {day.day}
+                      </div>
                     </div>
                     <div className="flex items-center gap-2">
                       {day.completed ? (
                         <CheckCircle2 className="h-4 w-4 text-green-500" />
                       ) : index === 0 ? (
-                        <Badge variant="default" className="text-xs">Hoje</Badge>
+                        <Badge variant="default" className="text-xs">
+                          Hoje
+                        </Badge>
                       ) : (
                         <Circle className="h-4 w-4 text-muted-foreground" />
                       )}
