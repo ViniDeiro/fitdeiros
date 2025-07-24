@@ -170,10 +170,12 @@ export default function Index() {
               De ectomorfo para 70kg ou qualquer objetivo que tenha.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="text-lg px-8">
-                Criar Meu Plano
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
+              <Link to="/onboarding">
+                <Button size="lg" className="text-lg px-8 w-full sm:w-auto">
+                  Criar Meu Plano
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
               <Button size="lg" variant="outline" className="text-lg px-8">
                 Ver Como Funciona
               </Button>
