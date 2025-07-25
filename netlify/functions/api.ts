@@ -3,9 +3,8 @@ import { createServer } from "../../server";
 
 const app = createServer();
 
-export default serverless(app, {
-  binary: false,
-});
+// Export default para Vercel
+export default serverless(app);
 
-// Para compatibilidade com Vercel
+// Export handler para compatibilidade
 export const handler = serverless(app);

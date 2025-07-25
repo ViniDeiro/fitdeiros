@@ -1,0 +1,23 @@
+# Desenvolvimento
+dev.db*
+.env
+.env.local
+*.log
+
+# Node modules (já são ignorados por padrão)
+node_modules/
+
+# Build local
+dist/server/
+
+# Prisma dev files
+prisma/migrations/
+prisma/*.dev.*
+
+# IDE
+.vscode/
+.idea/
+
+# Outros
+*.md
+!README.md 

@@ -34,6 +34,8 @@ function expressPlugin(): Plugin {
         const app = createServer();
         // Add Express app as middleware to Vite dev server
         server.middlewares.use(app);
+      }).catch((error) => {
+        console.warn("Could not load server in development:", error.message);
       });
     },
   };

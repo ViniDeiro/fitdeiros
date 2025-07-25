@@ -5,7 +5,7 @@
       "src": "package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "dist/spa"
       }
     },
     {
@@ -22,8 +22,11 @@
       "dest": "/netlify/functions/api.ts"
     },
     {
+      "handle": "filesystem"
+    },
+    {
       "src": "/(.*)",
-      "dest": "/dist/$1"
+      "dest": "/index.html"
     }
   ],
   "env": {
