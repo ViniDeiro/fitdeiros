@@ -30,5 +30,5 @@
     "NODE_ENV": "production"
   },
   "installCommand": "npm install",
-  "buildCommand": "npm run vercel-build"
+  "buildCommand": "prisma generate && vite build"
 } 
