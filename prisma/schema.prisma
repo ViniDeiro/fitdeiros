@@ -108,6 +108,7 @@ model Exercise {
 
   // Relacionamentos
   workoutExercises WorkoutExercise[]
+  exerciseSets     ExerciseSet[]
 
   @@map("exercises")
 }
