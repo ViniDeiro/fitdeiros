@@ -16,6 +16,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { MobileNav } from "@/components/ui/mobile-nav";
 import {
   Dumbbell,
   Play,
@@ -226,33 +227,43 @@ export default function Treino() {
   const currentWorkout = workoutPlan[0]; // Today's workout
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-16 md:pb-0">
       {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur sticky top-0 z-50">
+      <header className="border-b bg-background/95 backdrop-blur sticky top-0 z-40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 md:gap-4">
+              <MobileNav userName="Usuário" />
               <Link
                 to="/dashboard"
-                className="flex items-center gap-2 text-muted-foreground hover:text-primary"
+                className="flex items-center gap-2 text-muted-foreground hover:text-primary md:hidden"
               >
                 <ArrowLeft className="h-4 w-4" />
-                <span className="hidden sm:block">Dashboard</span>
+              </Link>
+              <Link
+                to="/dashboard"
+                className="hidden md:flex items-center gap-2 text-muted-foreground hover:text-primary"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span>Dashboard</span>
               </Link>
               <div className="flex items-center gap-2">
-                <Dumbbell className="h-6 w-6 text-primary" />
-                <span className="text-lg font-semibold">Meu Treino</span>
+                <Dumbbell className="h-5 w-5 md:h-6 md:w-6 text-primary" />
+                <span className="text-base md:text-lg font-semibold">Meu Treino</span>
               </div>
             </div>
 
-            <div className="flex items-center gap-4">
-              <Badge variant="outline" className="hidden sm:flex">
+            <div className="flex items-center gap-2 md:gap-4">
+              <Badge variant="outline" className="hidden sm:flex text-xs">
                 <Calendar className="h-3 w-3 mr-1" />
                 Semana {selectedWeek}
               </Badge>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="hidden md:flex">
                 <User className="h-4 w-4 mr-2" />
                 Perfil
+              </Button>
+              <Button variant="outline" size="sm" className="md:hidden">
+                <User className="h-4 w-4" />
               </Button>
             </div>
           </div>
@@ -330,7 +341,7 @@ export default function Treino() {
           </Card>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="grid lg:grid-cols-3 gap-4 md:gap-6">
           {/* Main Content - Exercise List */}
           <div className="lg:col-span-2">
             <Card>
@@ -473,7 +484,7 @@ export default function Treino() {
           </div>
 
           {/* Sidebar */}
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6">
             {/* Rest Timer */}
             <Card>
               <CardHeader>

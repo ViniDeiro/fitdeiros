@@ -10,6 +10,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { MobileNav } from "@/components/ui/mobile-nav";
 import {
   Dumbbell,
   UtensilsCrossed,
@@ -116,15 +117,18 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-16 md:pb-0">
       {/* Header */}
-      <header className="border-b bg-background/95 backdrop-blur sticky top-0 z-50">
+      <header className="border-b bg-background/95 backdrop-blur sticky top-0 z-40">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex h-16 items-center justify-between">
-            <Link to="/" className="flex items-center gap-2">
-              <Dumbbell className="h-8 w-8 text-primary" />
-              <span className="text-xl font-bold">FitPlan</span>
-            </Link>
+            <div className="flex items-center gap-2">
+              <MobileNav userName={profile.name} />
+              <Link to="/" className="flex items-center gap-2">
+                <Dumbbell className="h-6 w-6 md:h-8 md:w-8 text-primary" />
+                <span className="text-lg md:text-xl font-bold">FitPlan</span>
+              </Link>
+            </div>
 
             <nav className="hidden md:flex items-center gap-6">
               <Link
@@ -159,16 +163,19 @@ export default function Dashboard() {
               </Link>
             </nav>
 
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm">
+            <div className="flex items-center gap-2 md:gap-4">
+              <Button variant="ghost" size="sm" className="hidden sm:flex">
                 <Bell className="h-4 w-4" />
               </Button>
-              <Button variant="ghost" size="sm">
+              <Button variant="ghost" size="sm" className="hidden sm:flex">
                 <Settings className="h-4 w-4" />
               </Button>
-              <Button variant="outline" size="sm">
+              <Button variant="outline" size="sm" className="hidden md:flex">
                 <User className="h-4 w-4 mr-2" />
                 {profile.name.split(" ")[0]}
+              </Button>
+              <Button variant="outline" size="sm" className="md:hidden">
+                <User className="h-4 w-4" />
               </Button>
             </div>
           </div>
@@ -187,16 +194,16 @@ export default function Dashboard() {
         </div>
 
         {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 mb-6 md:mb-8">
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 md:px-6">
+              <CardTitle className="text-xs md:text-sm font-medium">
                 Progresso Geral
               </CardTitle>
-              <Target className="h-4 w-4 text-muted-foreground" />
+              <Target className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
             </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
+            <CardContent className="px-3 md:px-6">
+              <div className="text-xl md:text-2xl font-bold">
                 {Math.round(getProgressPercentage())}%
               </div>
               <p className="text-xs text-muted-foreground">
@@ -207,14 +214,14 @@ export default function Dashboard() {
           </Card>
 
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 md:px-6">
+              <CardTitle className="text-xs md:text-sm font-medium">
                 Treinos Semana
               </CardTitle>
-              <Dumbbell className="h-4 w-4 text-muted-foreground" />
+              <Dumbbell className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
             </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
+            <CardContent className="px-3 md:px-6">
+              <div className="text-xl md:text-2xl font-bold">
                 {stats.workoutsCompleted}/{stats.weeklyGoal}
               </div>
               <p className="text-xs text-muted-foreground">Meta semanal</p>
@@ -226,12 +233,12 @@ export default function Dashboard() {
           </Card>
 
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Peso Atual</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 md:px-6">
+              <CardTitle className="text-xs md:text-sm font-medium">Peso Atual</CardTitle>
+              <TrendingUp className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
             </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">
+            <CardContent className="px-3 md:px-6">
+              <div className="text-xl md:text-2xl font-bold">
                 {(
                   parseFloat(profile.currentWeight) + stats.weightProgress
                 ).toFixed(1)}
@@ -249,14 +256,14 @@ export default function Dashboard() {
           </Card>
 
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 px-3 md:px-6">
+              <CardTitle className="text-xs md:text-sm font-medium">
                 Próximo Marco
               </CardTitle>
-              <Award className="h-4 w-4 text-muted-foreground" />
+              <Award className="h-3 w-3 md:h-4 md:w-4 text-muted-foreground" />
             </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{stats.nextMilestone}</div>
+            <CardContent className="px-3 md:px-6">
+              <div className="text-xl md:text-2xl font-bold">{stats.nextMilestone}</div>
               <p className="text-xs text-muted-foreground">
                 Em aproximadamente 2 semanas
               </p>
@@ -268,9 +275,9 @@ export default function Dashboard() {
         </div>
 
         {/* Main Content */}
-        <div className="grid lg:grid-cols-3 gap-6">
+        <div className="grid lg:grid-cols-3 gap-4 md:gap-6">
           {/* Left Column - Main Actions */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-2 space-y-4 md:space-y-6">
             {/* Quick Actions */}
             <Card>
               <CardHeader>
@@ -280,32 +287,32 @@ export default function Dashboard() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="grid grid-cols-3 gap-3 md:gap-4">
                   <Link to="/treino">
                     <Button
-                      className="w-full h-20 flex flex-col gap-2"
+                      className="w-full h-16 md:h-20 flex flex-col gap-1 md:gap-2"
                       variant="outline"
                     >
-                      <Dumbbell className="h-8 w-8" />
-                      <span>Meu Treino</span>
+                      <Dumbbell className="h-6 w-6 md:h-8 md:w-8" />
+                      <span className="text-xs md:text-sm">Meu Treino</span>
                     </Button>
                   </Link>
                   <Link to="/dieta">
                     <Button
-                      className="w-full h-20 flex flex-col gap-2"
+                      className="w-full h-16 md:h-20 flex flex-col gap-1 md:gap-2"
                       variant="outline"
                     >
-                      <UtensilsCrossed className="h-8 w-8" />
-                      <span>Minha Dieta</span>
+                      <UtensilsCrossed className="h-6 w-6 md:h-8 md:w-8" />
+                      <span className="text-xs md:text-sm">Minha Dieta</span>
                     </Button>
                   </Link>
                   <Link to="/compras">
                     <Button
-                      className="w-full h-20 flex flex-col gap-2"
+                      className="w-full h-16 md:h-20 flex flex-col gap-1 md:gap-2"
                       variant="outline"
                     >
-                      <ShoppingCart className="h-8 w-8" />
-                      <span>Lista de Compras</span>
+                      <ShoppingCart className="h-6 w-6 md:h-8 md:w-8" />
+                      <span className="text-xs md:text-sm">Lista de Compras</span>
                     </Button>
                   </Link>
                 </div>
@@ -386,7 +393,7 @@ export default function Dashboard() {
           </div>
 
           {/* Right Column - Progress & Upcoming */}
-          <div className="space-y-6">
+          <div className="space-y-4 md:space-y-6">
             {/* This Week */}
             <Card>
               <CardHeader>
