@@ -1,0 +1,12 @@
+// Configuração do Prisma para desenvolvimento
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// Todos os modelos são iguais ao schema principal
+// Este arquivo é usado apenas para desenvolvimento local 

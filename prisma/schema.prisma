@@ -1,0 +1,307 @@
+// Configuração do Prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Modelo principal do usuário
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  profile      UserProfile?
+  workoutPlans WorkoutPlan[]
+  dietPlans    DietPlan[]
+  sessions     WorkoutSession[]
+  progress     Progress[]
+  shoppingLists ShoppingList[]
+
+  @@map("users")
+}
+
+// Perfil detalhado do usuário
+model UserProfile {
+  id            String   @id @default(cuid())
+  userId        String   @unique
+  bodyType      String   // ectomorfo, mesomorfo, endomorfo
+  currentWeight Float
+  targetWeight  Float
+  height        Float
+  age           Int
+  gender        String
+  goal          String   // ganhar-peso, perder-peso, definir
+  timeframe     String   // tempo estimado para objetivo
+  budget        Float    // orçamento mensal para alimentação
+  activityLevel String   // sedentario, leve, moderado, intenso
+  preferences   Json?    // preferências alimentares, alergias, etc
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relacionamentos
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_profiles")
+}
+
+// Planos de treino
+model WorkoutPlan {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  description String?
+  duration    String   // Ex: "6 semanas"
+  difficulty  String   // beginner, intermediate, advanced
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relacionamentos
+  user      User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workouts  Workout[]
+  sessions  WorkoutSession[]
+
+  @@map("workout_plans")
+}
+
+// Treinos individuais (dia específico)
+model Workout {
+  id            String   @id @default(cuid())
+  workoutPlanId String
+  name          String
+  day           String   // Ex: "Segunda-feira"
+  dayOfWeek     Int      // 1-7
+  duration      String   // Ex: "45-60 min"
+  muscleGroups  String[] // Ex: ["Peito", "Tríceps"]
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relacionamentos
+  workoutPlan WorkoutPlan       @relation(fields: [workoutPlanId], references: [id], onDelete: Cascade)
+  exercises   WorkoutExercise[]
+
+  @@map("workouts")
+}
+
+// Exercícios base
+model Exercise {
+  id           String   @id @default(cuid())
+  name         String
+  muscle       String
+  category     String   // Ex: "Peito", "Costas", "Pernas"
+  equipment    String[] // Ex: ["Halteres", "Banco"]
+  instructions String[] // Passos do exercício
+  tips         String?
+  videoUrl     String?
+  imageUrl     String?
+  difficulty   String   // beginner, intermediate, advanced
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  // Relacionamentos
+  workoutExercises WorkoutExercise[]
+
+  @@map("exercises")
+}
+
+// Exercícios dentro de um treino específico
+model WorkoutExercise {
+  id         String   @id @default(cuid())
+  workoutId  String
+  exerciseId String
+  sets       Int
+  reps       String   // Ex: "8-12"
+  weight     String   // Ex: "15kg cada"
+  restTime   String   // Ex: "60-90s"
+  order      Int      // Ordem do exercício no treino
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relacionamentos
+  workout  Workout  @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  exercise Exercise @relation(fields: [exerciseId], references: [id])
+
+  @@map("workout_exercises")
+}
+
+// Sessões de treino realizadas
+model WorkoutSession {
+  id            String   @id @default(cuid())
+  userId        String
+  workoutPlanId String?
+  workoutId     String?
+  date          DateTime
+  duration      Int?     // duração em minutos
+  completed     Boolean  @default(false)
+  notes         String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relacionamentos
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  workoutPlan WorkoutPlan? @relation(fields: [workoutPlanId], references: [id])
+  sets        ExerciseSet[]
+
+  @@map("workout_sessions")
+}
+
+// Séries realizadas em uma sessão
+model ExerciseSet {
+  id              String   @id @default(cuid())
+  sessionId       String
+  exerciseId      String
+  setNumber       Int
+  reps            Int
+  weight          Float?
+  restTime        Int?     // em segundos
+  completed       Boolean  @default(false)
+  createdAt       DateTime @default(now())
+
+  // Relacionamentos
+  session  WorkoutSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  exercise Exercise       @relation(fields: [exerciseId], references: [id])
+
+  @@map("exercise_sets")
+}
+
+// Planos de dieta
+model DietPlan {
+  id            String   @id @default(cuid())
+  userId        String
+  name          String
+  description   String?
+  totalCalories Int
+  totalProtein  Float
+  totalCarbs    Float
+  totalFats     Float
+  isActive      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  // Relacionamentos
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  dailyPlans DailyPlan[]
+
+  @@map("diet_plans")
+}
+
+// Planos diários de alimentação
+model DailyPlan {
+  id         String   @id @default(cuid())
+  dietPlanId String
+  dayOfWeek  Int      // 1-7
+  dayName    String   // Ex: "Segunda-feira"
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  // Relacionamentos
+  dietPlan DietPlan @relation(fields: [dietPlanId], references: [id], onDelete: Cascade)
+  meals    Meal[]
+
+  @@map("daily_plans")
+}
+
+// Refeições
+model Meal {
+  id          String   @id @default(cuid())
+  dailyPlanId String
+  name        String   // Ex: "Café da manhã"
+  time        String   // Ex: "07:00"
+  calories    Int
+  protein     Float
+  carbs       Float
+  fats        Float
+  foods       String[] // Lista de alimentos
+  recipe      Json?    // Receita detalhada
+  order       Int      // Ordem da refeição no dia
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  // Relacionamentos
+  dailyPlan DailyPlan @relation(fields: [dailyPlanId], references: [id], onDelete: Cascade)
+  logs      MealLog[]
+
+  @@map("meals")
+}
+
+// Log de refeições consumidas
+model MealLog {
+  id        String   @id @default(cuid())
+  mealId    String
+  date      DateTime
+  completed Boolean  @default(false)
+  notes     String?
+  createdAt DateTime @default(now())
+
+  // Relacionamentos
+  meal Meal @relation(fields: [mealId], references: [id], onDelete: Cascade)
+
+  @@map("meal_logs")
+}
+
+// Lista de compras
+model ShoppingList {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  week      Int
+  month     Int
+  year      Int
+  total     Float    @default(0)
+  completed Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // Relacionamentos
+  user  User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items ShoppingItem[]
+
+  @@map("shopping_lists")
+}
+
+// Itens da lista de compras
+model ShoppingItem {
+  id             String   @id @default(cuid())
+  shoppingListId String
+  name           String
+  category       String   // Ex: "Proteínas", "Carboidratos"
+  quantity       String   // Ex: "2 pacotes"
+  price          Float
+  importance     String   // essential, recommended, optional
+  checked        Boolean  @default(false)
+  alternatives   Json?    // Alternativas mais baratas
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // Relacionamentos
+  shoppingList ShoppingList @relation(fields: [shoppingListId], references: [id], onDelete: Cascade)
+
+  @@map("shopping_items")
+}
+
+// Acompanhamento de progresso
+model Progress {
+  id          String   @id @default(cuid())
+  userId      String
+  date        DateTime
+  weight      Float?
+  bodyFat     Float?
+  muscleMass  Float?
+  photos      String[] // URLs das fotos
+  measurements Json?   // Medidas corporais
+  notes       String?
+  createdAt   DateTime @default(now())
+
+  // Relacionamentos
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("progress")
+} 
